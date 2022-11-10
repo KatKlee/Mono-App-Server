@@ -1,6 +1,6 @@
 import {MongoClient} from "mongodb";
 const MONGOURI = process.env.MONGO_URI;
-const DBName = "telefonbuch";
+const DBName = "MONOAPPDB";
 
 const client = new MongoClient(MONGOURI);
 let db;
