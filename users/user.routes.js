@@ -1,13 +1,13 @@
 import express from "express";
-import {register} from "./user.controller.js";
+import {getOne, register} from "./user.controller.js";
+import {encrypt} from "../auth/middleware/encryptMiddleWare.js";
 
 const router = express.Router();
 
-router.post("/register", register);
+router.post("/register", encrypt, register);
 
-router.get("/", (req, res) => {
-    res.json({message: "it works"});
-});
+router.get("/", getOne);
+
 
 
 export default router;
