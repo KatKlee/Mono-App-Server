@@ -1,12 +1,12 @@
 import connect from "../utils/db.js";
-import {ObjectId} from "mongodb";
+import { ObjectId } from "mongodb";
 
 //finances Service
-import {editFinances, getFinances} from "../finances/finanses.service.js";
+import { editFinances, getFinances } from "../finances/finanses.service.js";
 
 export const addTransaction = async (body) => {
     const date = body.date.split("-");
-    const newDate = new Date(date[0], date[1]-1, date[2]);
+    const newDate = new Date(date[0], date[1] - 1, date[2]);
 
     const result1 = await editFinances(body.type, body.amount);
 
@@ -15,7 +15,7 @@ export const addTransaction = async (body) => {
 
     const db = await connect();
     const result2 = await db.collection("transactions").insertOne({
-        userid: new ObjectId("6374cca889a89c4aa72488ca"),
+        userid: new ObjectId(req.body.userid),
         name: body.name,
         amount: body.amount,
         date: newDate,
@@ -33,20 +33,20 @@ export const getTransactions = async (id) => {
             const allTransactions = await db.collection("transactions").find().toArray();
             return allTransactions;
         default:
-            const transaction = await db.collection("transactions").findOne({transactionID: id});
+            const transaction = await db.collection("transactions").findOne({ transactionID: id });
             return transaction;
     }
 }
 
 export const deleteTransaction = async (id) => {
     const db = await connect();
-    const result = await db.collection("transactions").deleteOne({transactionID: id});
+    const result = await db.collection("transactions").deleteOne({ transactionID: id });
     return result;
 }
 
 export const editTransaction = async (id, update) => {
     const db = await connect();
-    const result = await db.collection("transactions").updateOne({transactionID: id}, {$set: {...update}});
+    const result = await db.collection("transactions").updateOne({ transactionID: id }, { $set: { ...update } });
     return result;
 }
 
