@@ -23,7 +23,7 @@ app.use(cors());
 
 //routes
 app.use("/users", userRoutes);
-app.use("/transactions", transactionRoutes);
+app.use("/transactions", checkToken, transactionRoutes);
 app.use("/auth", authRoutes);
 app.use("/finanses", finansesRoutes);
 
