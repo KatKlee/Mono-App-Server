@@ -1,6 +1,6 @@
 import express from "express";
-import {getOne, register} from "./user.controller.js";
-import {encrypt} from "../auth/middleware/encryptMiddleWare.js";
+import { getOne, register } from "./user.controller.js";
+import { encrypt } from "../auth/middleware/encryptMiddleware.js";
 
 const router = express.Router();
 
